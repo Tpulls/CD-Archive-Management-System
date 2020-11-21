@@ -1,0 +1,44 @@
+[Box: ::CDArchiveProject - ::<<Unknown>>::DefaultTableCellRenderer]
+X=199
+Y=40
+
+[Box: ::CDArchiveProject - ::CDArchiveProject::ArchiveConsole]
+X=20
+Y=121
+
+[Box: ::CDArchiveProject - ::CDArchiveProject::ArchiveConsole.HighlightRenderer]
+X=223
+Y=139
+
+[Box: ::CDArchiveProject - ::CDArchiveProject::AutomationConsoleUI]
+X=473
+Y=40
+
+[Diagram: ::CDArchiveProject]
+OffsetX=0
+OffsetY=0
+Visibility=0
+ShowAssoc=0
+
+[Box: ::DataHandling - ::<<Unknown>>::AbstractTableModel]
+X=206
+Y=40
+
+[Box: ::DataHandling - ::DataHandling::CDRecord]
+X=12
+Y=41
+
+[Box: ::DataHandling - ::DataHandling::CDRecordTableModel]
+X=225
+Y=114
+
+[Box: ::DataHandling - ::DataHandling::RecordStorage]
+X=447
+Y=40
+
+[Diagram: ::DataHandling]
+OffsetX=0
+OffsetY=0
+Visibility=0
+ShowAssoc=0
+
