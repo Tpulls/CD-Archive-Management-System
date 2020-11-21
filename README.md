@@ -1,7 +1,7 @@
 <https://github.com/Tpulls/CD-Archive-Management-System>
 # CD-Archive-Manangement-System
 
-This project was created in the TAFE Course, Diploma of Software Development in Semester 1.
+This project was created in the TAFE Course, Diploma of Software Development in Semester 2.
 Project Initial Commit Date: 21/11/2020.
 
 ## Project Notes & Contact Information
