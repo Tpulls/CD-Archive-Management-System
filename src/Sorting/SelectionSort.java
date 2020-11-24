@@ -1,7 +1,7 @@
 /**
  * CD Archive Management System - Selection Sort
  *
- * Version Control: 19/11/2020
+ * Version Control: 1.0.2 - 25/11/2020
  *      refer to: https://github.com/Tpulls/CD-Archive-Management-System
  *
  * AUTHOR: Thomas Pullar

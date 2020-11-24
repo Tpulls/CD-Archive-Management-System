@@ -1,7 +1,7 @@
 /**
  * CD Archive Management System - CD Record
  *
- * Version Control: 19/11/2020
+ * Version Control: 1.0.2 - 25/11/2020
  *      refer to: https://github.com/Tpulls/CD-Archive-Management-System
  *
  * AUTHOR: Thomas Pullar
@@ -24,7 +24,9 @@ public class CDRecord {
     String description;
     boolean onLoan;
 
-    // Create a constructor specifically for the barcode - N/a
+    /**
+     * Constructor for the barcode
+     * */
     public CDRecord(int barcode){
         this.barcode = barcode;
     }
@@ -43,7 +45,9 @@ public class CDRecord {
                 '}';
     }
 
-    // Create a constructor for the CDRecord components
+    /**
+     * Constructor for the CDRecord components
+     * */
     public CDRecord(String title, String author, String section, int xLocation, int yLocation, int barcode, String description, boolean onLoan){
         // Parse the data to the variable
         this.title = title;
@@ -56,12 +60,16 @@ public class CDRecord {
         this.onLoan = onLoan;
     }
 
-    // Method that returns the barcode
+    /**
+     * Constructor to get the Barcode
+     * */
     public int getBarcode(){
         return barcode;
     }
 
-
+    /**
+     * Test Data method - Not required past testing
+     * */
     public static List<CDRecord> getTestData() {
     CDRecord[] records = new CDRecord[]{
             new CDRecord("Foo", "Bar", "A", 0, 0, 1001, "Album", false),
@@ -81,63 +89,93 @@ public class CDRecord {
     return Arrays.asList(records);
 
     }
-
+    /**
+     * Constructor to get the Title
+     * */
     public String getTitle() {
         return title;
     }
-
+    /**
+     * Constructor to set the Title
+     * */
     public void setTitle(String title) {
         this.title = title;
     }
-
+    /**
+     * Constructor to get the Author
+     * */
     public String getAuthor() {
         return author;
     }
-
+    /**
+     * Constructor to set the Author
+     * */
     public void setAuthor(String author) {
         this.author = author;
     }
-
+    /**
+     * Constructor to get the Section
+     * */
     public String getSection() {
         return section;
     }
-
+    /**
+     * Constructor to set the Section
+     * */
     public void setSection(String section) {
         this.section = section;
     }
-
+    /**
+     * Constructor to get the X Location
+     * */
     public int getxLocation() {
         return xLocation;
     }
-
+    /**
+     * Constructor to set the X Location
+     * */
     public void setxLocation(int xLocation) {
         this.xLocation = xLocation;
     }
-
+    /**
+     * Constructor to get the Y Location
+     * */
     public int getyLocation() {
         return yLocation;
     }
-
+    /**
+     * Constructor to set the Y Location
+     * */
     public void setyLocation(int yLocation) {
         this.yLocation = yLocation;
     }
-
+    /**
+     * Constructor to set the Barcode
+     * */
     public void setBarcode(int barcode) {
         this.barcode = barcode;
     }
-
+    /**
+     * Constructor to get the Description
+     * */
     public String getDescription() {
         return description;
     }
-
+    /**
+     * Constructor to set the Description
+     * */
     public void setDescription(String description) {
         this.description = description;
     }
-
+    /**
+     * Constructor to get the on loan status
+     * */
     public boolean isOnLoan() {
         return onLoan;
     }
-
+    /**
+     * Constructor to set the on loan status
+     * */
     public void setOnLoan(boolean onLoan) {
         this.onLoan = onLoan;
     }

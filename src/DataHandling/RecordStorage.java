@@ -1,7 +1,7 @@
 /**
  * CD Archive Management System - Reocord Storage
  *
- * Version Control: 19/11/2020
+ * Version Control: 1.0.2 - 25/11/2020
  *      refer to: https://github.com/Tpulls/CD-Archive-Management-System
  *
  * AUTHOR: Thomas Pullar
@@ -20,6 +20,9 @@ import java.util.List;
 
 public class RecordStorage {
 
+    /**
+     * Create a main method for the handling of records
+     * */
     // This is for testing
     public static void main(String[] args) {
         // Set the file path for the record and set to a list variable
@@ -28,6 +31,9 @@ public class RecordStorage {
         System.out.println(records);
     }
 
+    /**
+     * Create method to load the records
+     * */
     // Provide file name and get a list of records (load)
     public static List<CDRecord> loadRecordList(String filepath) {
         // Create a place to store the records
@@ -63,8 +69,9 @@ public class RecordStorage {
         return records;
     }
 
-
-    // save the records
+    /**
+     * Create method to save the records
+     * */
     public static void saveRecordsList(String filepath, List<CDRecord> records) {
         // Open file for writing
         try {
@@ -88,12 +95,6 @@ public class RecordStorage {
         catch(Exception e){
             System.err.println("Failed to load records: " + e.toString());
     }
-
-        // For each record
-        // Create string with member fields separated by:
-        // write line to file
-        // save and close file
-
     }
 
 

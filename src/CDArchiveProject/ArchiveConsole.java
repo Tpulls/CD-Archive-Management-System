@@ -1,7 +1,7 @@
 /**
  * CD Archive Management System - Archive Console
  *
- * Version Control: 19/11/2020
+ * Version Control: 1.0.2 - 25/11/2020
  *      refer to: https://github.com/Tpulls/CD-Archive-Management-System
  *
  * AUTHOR: Thomas Pullar
@@ -68,6 +68,9 @@ public class ArchiveConsole {
 
     DoubleLinkedList processLogDLL = new DoubleLinkedList();
 
+    /**
+     * Creates the Archive Console Window
+     * */
     public ArchiveConsole(){
 
         // Setup our data
@@ -119,7 +122,9 @@ public class ArchiveConsole {
         window.setVisible(true);
     }
 
-    // All the UI code in this method
+    /**
+     * Creates the Archive Interface
+     * */
     private void createUI() {
 
         //region Labels
@@ -214,11 +219,11 @@ public class ArchiveConsole {
                     }
             }
         });
-
-
     }
 
-    // Create CD Archive Panel
+    /**
+     * Creates the Archive List Panel
+     * */
     private JPanel createArchiveListPanel() {
         // Create a new panel
         JPanel panel = new JPanel();
@@ -273,10 +278,6 @@ public class ArchiveConsole {
 
         //cdRecordTable.setPreferredScrollableViewportSize(new Dimension(450,63));
         cdRecordTable.setFillsViewportHeight(true);
-        //JScrollPane js = new JScrollPane(cdRecordTable);
-        //js.setVisible(true);
-        //cdRecordTable.add(js);
-        //endregion
 
         // Create a border
         cdRecordTableScrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
@@ -431,7 +432,9 @@ public class ArchiveConsole {
         return panel;
     }
 
-    // Create Process Log Panel
+    /**
+     * Creates the Archive Process Log panel
+     * */
     private JPanel createProcessLogPanel() {
         JPanel panel = new JPanel();
         // Setup a GridBagLayout inside the panel to organise the internal components
@@ -627,7 +630,9 @@ public class ArchiveConsole {
         return panel;
     }
 
-    // Create Record Panel
+    /**
+     * Creates the Archive Record panel
+     * */
     private JPanel createRecordPanel() {
         JPanel panel = new JPanel();
         // Setup a GridBagLayout inside the panel to organise the internal components
@@ -876,7 +881,9 @@ public class ArchiveConsole {
         return panel;
     }
 
-    // Create Action Request panel
+    /**
+     * Creates the Archive Action Request panel
+     * */
     private JPanel createActionRequestPanel(){
         JPanel panel = new JPanel();
         // Call the layout
@@ -982,8 +989,8 @@ public class ArchiveConsole {
         addToCollectionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                client.sendMessage("Action Request(Archive Console) - Record added to Collection:   " + "\n" + "Title: " + focusedRecord.getTitle() + "; " + "Section: " + focusedRecord.getSection()
-                        + "; " + "X Location: " + focusedRecord.getxLocation() + "; " + "Y Location: " + focusedRecord.getyLocation()+ ";");
+                client.sendMessage("Action Request(Archive Console) Data: Request, Title, Section, X Location, Y Location, barcode;" + "Add" + ";" + focusedRecord.getTitle() + "; "
+                        + focusedRecord.getSection() + "; " + focusedRecord.getBarcode() + "; ");
             }
         });
 
@@ -991,8 +998,8 @@ public class ArchiveConsole {
         retrieveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                client.sendMessage("Action Request(Archive Console) - Record retrieved from Collection:   " + "\n" + "Title: " + focusedRecord.getTitle() + "; " + "Section: " + focusedRecord.getSection()
-                        + "; " +"X Location: " + focusedRecord.getxLocation() + "; " + "Y Location: " + focusedRecord.getyLocation() + ";");
+                client.sendMessage("Action Request(Archive Console) Data: Request, Title, Section, X Location, Y Location, barcode;" + "Retrieve" + ";" + focusedRecord.getTitle() + "; "
+                        + focusedRecord.getSection() + "; " + focusedRecord.getBarcode() + "; ");
             }
         });
 
@@ -1000,16 +1007,16 @@ public class ArchiveConsole {
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                client.sendMessage("Action Request(Archive Console) - Record removed from collection:   " + "\n" + "Title: " + focusedRecord.getTitle() + "; " + "Section: " + focusedRecord.getSection()
-                        + "; " +"X Location: " + focusedRecord.getxLocation() + "; " + "Y Location: " + focusedRecord.getyLocation() + ";");
+                client.sendMessage("Action Request(Archive Console) Data: Request, Title, Section, X Location, Y Location, barcode;" + "Remove" + ";" + focusedRecord.getTitle() + "; "
+                        + focusedRecord.getSection() + "; " + focusedRecord.getBarcode() + "; ");
             }
         });
 
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                client.sendMessage("Action Request(Archive Console) - Record returned to Collection:   " + "\n" + "Title: " + focusedRecord.getTitle() + "; " + "Section: " + focusedRecord.getSection()
-                        + "; " + "X Location: " + focusedRecord.getxLocation() + "; " + "Y Location: " + focusedRecord.getyLocation()+ ";");
+                client.sendMessage("Action Request(Archive Console) Data: Request, Title, Section, X Location, Y Location, barcode;" + "Return" + ";" + focusedRecord.getTitle() + "; "
+                        + focusedRecord.getSection() + "; " + focusedRecord.getBarcode() + "; ");
             }
         });
 
@@ -1021,7 +1028,7 @@ public class ArchiveConsole {
                     sortField.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
                 }
                 else {
-                    client.sendMessage("Action Request(Archive Console) - Random Collection Sort applied to section " + "'" + sortField.getText().toUpperCase() + "'");
+                    client.sendMessage("Action Request(Archive Console)" + "; " + "Sort" + ";" + "Random Collection" + "; " + sortField.getText().toUpperCase() + ";" + "N/A" + ";");
                     sortField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
                 }
             }
@@ -1035,7 +1042,7 @@ public class ArchiveConsole {
                     sortField.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
                 }
                 else{
-                    client.sendMessage("Mostly Sorted Sort applied to section " + "'" + sortField.getText().toUpperCase() + "'");
+                    client.sendMessage("Action Request(Archive Console)" + "; " + "Sort" + ";" + " - Mostly Sorted" + "; " + sortField.getText().toUpperCase() + ";" + "N/A" + ";");
                     sortField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
                 }
             }
@@ -1050,7 +1057,7 @@ public class ArchiveConsole {
                 }
                 else
                 {
-                    client.sendMessage("Reverse order Sort applied to section " + "'" + sortField.getText().toUpperCase() + "'");
+                    client.sendMessage("Action Request(Archive Console)" + "; " + "Sort" + ";" + " - Reverse Order Sorted" + "; " + sortField.getText().toUpperCase() + ";" + "N/A" + ";");
                     sortField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
                 }
             }
@@ -1059,6 +1066,9 @@ public class ArchiveConsole {
         return panel;
     }
 
+    /**
+     * Bind the components for the Grid Bag Constraints (method overloading)
+     * */
     // C exists in any object that extends Component
     private <C extends Component> void addComponent(
             Container contentPane, C component, int fill, int gridX, int gridY, int gridWidth, int gridHeight, float weightX, float weightY
@@ -1081,6 +1091,9 @@ public class ArchiveConsole {
 
     }
 
+    /**
+     * Bind the components for the Grid Bag Constraints (method overloading)
+     * */
     // C exists in any object that extends Component
     // add another method to handle the additional parameters of insets and anchor
     private <C extends Component> void addComponent(
@@ -1106,7 +1119,9 @@ public class ArchiveConsole {
         contentPane.add(component, constraints);
 
     }
-    // member to create an instance of the form
+    /**
+     * Main run method for the Archive Console
+     * */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -1117,15 +1132,9 @@ public class ArchiveConsole {
         });
     }
 
-    ArrayList<String> convertNodeToStringList(List<BinaryTree.Node> nodeList) {
-        ArrayList<String> strList = new ArrayList();
-        for (BinaryTree.Node node : nodeList) {
-            CDRecord records = (CDRecord) node.getData();
-            strList.add(records.getBarcode() + " + " + records.getTitle());
-        }
-        return strList;
-    }
-
+    /**
+     * Class to handle highlighting a row as a result of a search action
+     * */
     private class HighlightRenderer extends DefaultTableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
@@ -1138,6 +1147,4 @@ public class ArchiveConsole {
             return this;
         }
     }
-
-
 }
