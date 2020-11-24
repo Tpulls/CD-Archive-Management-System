@@ -1,7 +1,7 @@
 /**
  * CD Archive Management System - Client
  *
- * Version Control: 19/11/2020
+ * Version Control: 1.0.2 - 25/11/2020
  *      refer to: https://github.com/Tpulls/CD-Archive-Management-System
  *
  * AUTHOR: Thomas Pullar
@@ -20,13 +20,12 @@ public class Client implements MessageSender{
     Socket connection;
     PrintWriter outputStream;
     BufferedReader inputStream;
-
-    /**
-     * Java Doc Boi
-     */
     MessageListener messageListener;
     Thread messageListenerThread;
 
+    /**
+     * Method to handle the setup of the client
+     * */
     public Client(String address, MessageListener messageListener) {
         this.messageListener = messageListener;
         MessageSender sender = this;
@@ -59,6 +58,7 @@ public class Client implements MessageSender{
                         try {
                             String message = inputStream.readLine();
                             messageListener.message(message, sender);
+                            System.out.println(message);
                         } catch (Exception e) {
                             System.out.println("Failed to receive message: " + e);
                             break;
@@ -66,19 +66,23 @@ public class Client implements MessageSender{
                     }
                 }
             });
-
             messageListenerThread.start();
-
         } catch(Exception e) {
           System.err.println("Failed to connect: " + e);
         }
     }
 
+    /**
+     * Method to handle the connection of the client
+     * */
     private boolean isConnected() {
         // Checking if the connection stream is open to send data
         return connection != null && outputStream != null && inputStream != null;
     }
 
+    /**
+     * Method to handle the disconnection of the client
+     * */
     public void disconnect() {
         if (isConnected()){
             try {
@@ -91,8 +95,9 @@ public class Client implements MessageSender{
             }
         }
     }
-
-
+    /**
+     * Method to handle the message sending
+     * */
     @Override
     public void sendMessage(String msg) {
         if (isConnected()) {

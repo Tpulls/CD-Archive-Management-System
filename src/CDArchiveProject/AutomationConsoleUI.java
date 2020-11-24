@@ -1,7 +1,7 @@
 /**
  * CD Archive Management System - Automation Console
  *
- * Version Control: 19/11/2020
+ * Version Control: 1.0.2 - 25/11/2020
  *      refer to: https://github.com/Tpulls/CD-Archive-Management-System
  *
  * AUTHOR: Thomas Pullar
@@ -24,10 +24,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.JTable;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +34,12 @@ public class AutomationConsoleUI {
     Client client;
     ArrayList processHistoryData;
     CDRecord focusedRecord;
+    CDRecord[] retrieveRecord;
+    String retreiveTitle;
+    String retreiveSection;
+    String retreiveMethod;
+    String retrieveBarcode;
+
 
     JTable archiveConsoleTable;
     CDRecordTableModel tableData;
@@ -59,7 +62,9 @@ public class AutomationConsoleUI {
 
     String requestedActions[] = {"Add to Collection", "Retrieve", "Return", "Remove", "Sort"};
 
-
+    /**
+     * Creates the Automation Console Window
+     * */
     public AutomationConsoleUI() {
         records = RecordStorage.loadRecordList("records.data");
         window = new JFrame("Automation Console");
@@ -80,12 +85,38 @@ public class AutomationConsoleUI {
         client = new Client("localhost:20000", new MessageListener() {
             @Override
             public void message(String msg, MessageSender sender) {
-                processHistoryData.add(msg);
+                String[] data = msg.split(";");
+                retreiveMethod = data[1];
+                retreiveSection = data[3];
+                retrieveBarcode = data[4];
+
+                sectionField.setText(retreiveSection);
+                selectedItemBarcodeField.setText(retrieveBarcode);
+                if (retrieveBarcode == null){
+                    selectedItemBarcodeField.setText("");
+                }
+                if (retreiveMethod.contains("Add")){
+                    actionRequestCombo.setSelectedIndex(0);
+                }
+                else if(retreiveMethod.contains("Retrieve")) {
+                    actionRequestCombo.setSelectedIndex(1);
+                }
+                else if(retreiveMethod.contains("Return")) {
+                    actionRequestCombo.setSelectedIndex(2);
+                }
+                else if(retreiveMethod.contains("Remove")) {
+                    actionRequestCombo.setSelectedIndex(3);
+                }
+                else if(retreiveMethod.contains("Sort")) {
+                    actionRequestCombo.setSelectedIndex(4);
+                }
             }
         });
-
     }
 
+    /**
+     * Creates the Automation Console Interface
+     * */
     private void createUI() {
 
                 //region Labels
@@ -204,21 +235,27 @@ public class AutomationConsoleUI {
 
                     case 3: outMessage += "Action Request(Automation Console) - Remove: "; break;
 
-                    case 4: outMessage += "Action Request(Automation Console) - Sort: "; break;
                 }
 
                 outMessage += ("\n" + "Title: " + focusedRecord.getTitle() + "; " + "Section: " + focusedRecord.getSection()
                         + "; " + "X Location: " + focusedRecord.getxLocation() + "; " + "Y Location: " + focusedRecord.getyLocation() + ";");
+
+                if(actionRequestCombo.getSelectedIndex() == 4){
+                    outMessage = "Action Request(Automation Console) Sorted - Section: " + sectionField.getText();
+                }
 
                 if(client !=  null) {
                     client.sendMessage(outMessage);
                 }
             }
         });
-
         //endregion
     }
 
+
+    /**
+     * Creates the Archive List Panel
+     * */
     // Create ArchiveListPanel
     private JPanel createArchiveListPanel() {
         //region panel
@@ -302,7 +339,6 @@ public class AutomationConsoleUI {
             }
         });
     }
-
 
     //region addComponent
 

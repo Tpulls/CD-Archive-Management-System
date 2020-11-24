@@ -1,7 +1,7 @@
 /**
  * CD Archive Management System - Double Linked List
  *
- * Version Control: 19/11/2020
+ * Version Control: 1.0.2 - 25/11/2020
  *      refer to: https://github.com/Tpulls/CD-Archive-Management-System
  *
  * AUTHOR: Thomas Pullar
@@ -14,11 +14,16 @@ import DataHandling.CDRecord;
 import javax.tools.JavaFileManager;
 import java.util.List;
 
+/**
+ * Class for the Double Linked List
+ * */
 public class DoubleLinkedList {
 
     List<CDRecord> records;
 
-    // Pointer to head and tail nodes
+    /**
+     * Main class to test the Double linked list
+     * */
     public static void main(String[] args) {
         DoubleLinkedList myList = new DoubleLinkedList();
         System.out.println(myList.toString());
@@ -58,6 +63,9 @@ public class DoubleLinkedList {
 
     Node head, tail;
 
+    /**
+     * Constructor for the Node
+     * */
     public static class Node {
 
         // Member: Pointer to next and previous
@@ -92,7 +100,9 @@ public class DoubleLinkedList {
 
     }
 
-    // Method: prepend
+    /**
+     * Method to handle the DLL prepend
+     * */
     public void prepend(Node node) {
         if (this.head == null || this.tail == null) {
             this.head = node;
@@ -104,7 +114,9 @@ public class DoubleLinkedList {
         }
     }
 
-    // Method: append
+    /**
+     * Method to handle the DLL append
+     * */
     public void append(Node node) {
         if (this.head == null || this.tail == null) {
             this.head = node;
@@ -119,7 +131,9 @@ public class DoubleLinkedList {
         }
     }
 
-    // Method: find
+    /**
+     * Method to handle the DLL find
+     * */
     public Node find(Object data) {
         // Start looking from the headNode
         Node focusNode = this.head;
@@ -137,7 +151,9 @@ public class DoubleLinkedList {
         return null;
     }
 
-    // Method: insertBefore
+    /**
+     * Method to handle the DLL insertBefore
+     * */
     public void insertBefore(Node nodeAfter, Node nodeBefore) {
         // Unsure what this line of code achieves
         if (nodeBefore == null) {
@@ -159,7 +175,9 @@ public class DoubleLinkedList {
     }
 
 
-    // Method: insertAfter
+    /**
+     * Method to handle the DLL insertAfter
+     * */
     public void insertAfter(Node nodeBefore, Node nodeAfter) {
         if (nodeBefore == null) {
             return;
@@ -181,7 +199,9 @@ public class DoubleLinkedList {
         }
     }
 
-    // Method: remove
+    /**
+     * Method to handle the DLL node remove
+     * */
     public void remove(Node node) {
         // If we want to remove the head, change the new head to the next node
         if (node == this.head) {
@@ -194,7 +214,9 @@ public class DoubleLinkedList {
         }
     }
 
-    // Method: toString
+    /**
+     * Method to handle of the DLL node remove
+     * */
     public String toString() {
         Node focusNode = this.head;
         String str = "";
@@ -209,7 +231,9 @@ public class DoubleLinkedList {
         return str;
     }
 
-    // Method: toStringReverse
+    /**
+     * Method to test the DLL and node modification methods
+     * */
     public String toStringReverse() {
         Node focusNode = this.tail;
         String str = "DoubleLinkedList: ";
@@ -223,9 +247,4 @@ public class DoubleLinkedList {
         }
         return str;
     }
-
-    public void searchFilter(CDRecord records, String input) {
-        //DoubleLinkedList cds = records;
-    }
-
 }
